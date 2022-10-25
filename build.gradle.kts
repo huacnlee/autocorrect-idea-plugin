@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.huacnlee"
-version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation("org.slf4j:slf4j-nop:1.7.36")
-    implementation("io.github.huacnlee:autocorrect-java:2.3.2-beta")
+    implementation("io.github.huacnlee:autocorrect-java:2.3.2")
 }
 
 // Configure Gradle IntelliJ Plugin
