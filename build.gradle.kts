@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.huacnlee"
-version = "1.1.0"
+version = "1.1.1"
 
 repositories {
     mavenCentral()
@@ -21,7 +21,6 @@ dependencies {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("2021.3.3")
-
     plugins.set(listOf())
 }
 

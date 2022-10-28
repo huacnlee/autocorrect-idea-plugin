@@ -45,6 +45,9 @@ public class AutoCorrectExternalAnnotator extends ExternalAnnotator<Editor, Lint
             var range = new TextRange(startOffset, endOffset);
 
             var severity = HighlightSeverity.WEAK_WARNING;
+            if (line.getSeverity() == 2) {
+                severity = HighlightSeverity.INFORMATION;
+            }
 
             var message = line.getNew();
             holder.newAnnotation(severity, message)
