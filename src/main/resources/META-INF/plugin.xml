@@ -21,6 +21,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
+
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
@@ -38,11 +39,10 @@
         <actionOnSave id="AutoCorrectActionOnSave"
                       implementation="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectActionOnSave"
                       order="first"/>
-        <externalAnnotator
-                language="JSON"
-                implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
-        <externalAnnotator
-                implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
+
+        <!-- externalAnnotator for languages -->
+        <externalAnnotator language=""
+                           implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
     </extensions>
     <actions>
         <action id="io.github.huacnlee.autocorrect.FormatAction"
