@@ -12,6 +12,11 @@ public class FormatAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         final Project project = e.getProject();
         final Editor editor = e.getData(CommonDataKeys.EDITOR);
-        AutoCorrectExecutor.format(project, editor.getDocument());
+        if (editor == null) {
+            return;
+        }
+        var doc = editor.getDocument();
+        
+        AutoCorrectExecutor.format(project, doc);
     }
 }

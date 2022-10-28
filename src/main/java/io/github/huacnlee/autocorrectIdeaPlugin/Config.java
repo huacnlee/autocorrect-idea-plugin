@@ -6,6 +6,7 @@ import io.github.huacnlee.Ignorer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class Config {
     private final String basePath;
@@ -17,7 +18,7 @@ public class Config {
         if (Config.current == null) {
             Config.current = new Config(basePath);
         }
-        if (Config.current.basePath != basePath) {
+        if (!Objects.equals(Config.current.basePath, basePath)) {
             Config.current = new Config(basePath);
         }
 
@@ -33,9 +34,15 @@ public class Config {
         this.ignorer = new Ignorer(basePath);
 
         String configStr = "{}";
-        try {
-            configStr = Files.readString(Paths.get(basePath, ".autocorrectrc"));
-        } catch (IOException ex) {
+        var configPath = Paths.get(basePath, ".autocorrectrc");
+        if (Files.exists(configPath)) {
+            try {
+                configStr = Files.readString(configPath);
+            } catch (IOException ex) {
+                // Ignore error
+                System.out.println("------- Load AutoCorrect config file error -------------");
+                System.out.println(ex.toString());
+            }
         }
         AutoCorrect.loadConfig(configStr);
     }

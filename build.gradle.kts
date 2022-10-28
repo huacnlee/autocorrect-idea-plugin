@@ -1,8 +1,8 @@
 plugins {
     idea
     id("java")
-    id("java-library")
-    id("org.jetbrains.intellij") version "1.8.0"
+    id("org.jetbrains.intellij") version "1.9.0"
+    id("org.jetbrains.kotlin.jvm") version "1.7.20"
 }
 
 group = "io.github.huacnlee"
@@ -21,7 +21,6 @@ dependencies {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("2021.3.3")
-    type.set("IC") // Target IDE Platform
 
     plugins.set(listOf())
 }
@@ -31,6 +30,14 @@ tasks {
     withType<JavaCompile> {
         sourceCompatibility = "11"
         targetCompatibility = "11"
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
     }
 
     patchPluginXml {

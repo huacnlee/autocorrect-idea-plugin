@@ -1,18 +1,15 @@
 package io.github.huacnlee.autocorrectIdeaPlugin;
 
 import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.codeInspection.ProblemHighlightType;
-import com.intellij.codeInspection.util.InspectionMessage;
+import com.intellij.codeInspection.InspectionsBundle;
 import com.intellij.codeInspection.util.IntentionFamilyName;
 import com.intellij.codeInspection.util.IntentionName;
 import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
@@ -23,10 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.util.TextRange;
 
-import java.util.List;
 
 public class AutoCorrectExternalAnnotator extends ExternalAnnotator<Editor, LintResult> {
-    private static final String MESSAGE_PREFIX = "Typo: ";
 
     @Nullable
     @Override
@@ -50,9 +45,6 @@ public class AutoCorrectExternalAnnotator extends ExternalAnnotator<Editor, Lint
             var range = new TextRange(startOffset, endOffset);
 
             var severity = HighlightSeverity.WEAK_WARNING;
-            if (line.getSeverity() == 2) {
-                severity = HighlightSeverity.INFORMATION;
-            }
 
             var message = line.getNew();
             holder.newAnnotation(severity, message)

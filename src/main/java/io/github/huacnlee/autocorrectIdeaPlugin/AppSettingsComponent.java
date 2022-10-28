@@ -14,11 +14,6 @@ public class AppSettingsComponent {
     public AppSettingsComponent() {
 
         myMainPanel = FormBuilder.createFormBuilder()
-//                .addComponent(enableStatus, 1)
-//                .addComponent(new JLabel("Turn on/off AutoCorrect."))
-//                .addVerticalGap(2)
-//                .addSeparator()
-//                .addVerticalGap(2)
                 .addComponent(enableFormatOnSaveStatus, 1)
                 .addComponent(new JLabel("Turn on/off autoformatting file on save."))
                 .addComponentFillVertically(new JPanel(), 0)

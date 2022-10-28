@@ -11,12 +11,16 @@ import javax.annotation.Nullable;
 
 public class AutoCorrectExecutor {
     // https://plugins.jetbrains.com/docs/intellij/working-with-text.html#safely-replacing-selected-text-in-the-document
-    public static void format(Project project, Document doc) {
-        final String filepath = FileDocumentManager.getInstance().getFile(doc).getPath();
-        Config config = Config.getCurrent(project.getBasePath());
-        if (config.isIgnored(filepath)) {
-            System.out.printf("%s is ignored.\n", filepath);
-            return;
+    public static void format(@Nullable Project project, Document doc) {
+        var file = FileDocumentManager.getInstance().getFile(doc);
+        final String filepath = file == null ? "text" : file.getPath();
+
+        if (project != null) {
+            Config config = Config.getCurrent(project.getBasePath());
+            if (config.isIgnored(filepath)) {
+                System.out.printf("%s is ignored.\n", filepath);
+                return;
+            }
         }
 
         String text = doc.getText();
@@ -30,12 +34,16 @@ public class AutoCorrectExecutor {
     }
 
     @Nullable
-    public static LintResult lint(Project project, Document doc) {
-        final String filepath = FileDocumentManager.getInstance().getFile(doc).getPath();
-        Config config = Config.getCurrent(project.getBasePath());
-        if (config.isIgnored(filepath)) {
-            System.out.printf("%s is ignored.\n", filepath);
-            return null;
+    public static LintResult lint(@Nullable Project project, Document doc) {
+        var file = FileDocumentManager.getInstance().getFile(doc);
+        final String filepath = file == null ? "text" : file.getPath();
+
+        if (project != null) {
+            Config config = Config.getCurrent(project.getBasePath());
+            if (config.isIgnored(filepath)) {
+                System.out.printf("%s is ignored.\n", filepath);
+                return null;
+            }
         }
 
         String text = doc.getText();

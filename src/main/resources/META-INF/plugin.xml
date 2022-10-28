@@ -16,6 +16,9 @@
     <description><![CDATA[
     AutoCorrect is a linter and formatter to help you to improve copywriting, correct spaces, words, punctuations between CJK (Chinese, Japanese, Korean).
   ]]></description>
+    <change-notes>
+        
+    </change-notes>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -29,9 +32,8 @@
         <applicationConfigurable
                 parentId="tools"
                 instance="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectConfigurable"
-                id="io.github.huacnlee.autocorrect.AutoCorrectConfigurable"
+                id="settings.autocorrect"
                 displayName="AutoCorrect"/>
-        <projectService serviceImplementation="io.github.huacnlee.autocorrectIdeaPlugin.ConfigFileListener"/>
         <!-- https://github.com/JetBrains/intellij-plugins/blob/5f36be77b4b7da753bd04924f4cf7d8c25d63545/prettierJS/resources/META-INF/plugin.xml -->
         <actionOnSaveInfoProvider id="AutoCorrectOnSaveInfoProvider"
                                   implementation="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectConfigurable$AutoCorrectOnSaveInfoProvider"
@@ -43,19 +45,19 @@
         <!-- externalAnnotator for languages -->
         <externalAnnotator language=""
                            implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
+
+
     </extensions>
+    <applicationListeners>
+        <listener class="io.github.huacnlee.autocorrectIdeaPlugin.ConfigFileListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    </applicationListeners>
     <actions>
         <action id="io.github.huacnlee.autocorrect.FormatAction"
                 class="io.github.huacnlee.autocorrectIdeaPlugin.FormatAction"
-                text="AutoCorrect Format" description="Format selected text by AutoCorrect">
+                text="AutoCorrect Format" description="Format document text by AutoCorrect">
             <add-to-group group-id="CodeMenu" anchor="last"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
-    <application-components>
-        <component>
-            <implementation-class>io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectProjectComponent
-            </implementation-class>
-        </component>
-    </application-components>
 </idea-plugin>
