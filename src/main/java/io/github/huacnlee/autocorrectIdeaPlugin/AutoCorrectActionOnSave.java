@@ -25,7 +25,7 @@ public class AutoCorrectActionOnSave extends ActionsOnSaveFileDocumentManagerLis
                 return;
             }
 
-            Formatter.format(project, doc);
+            AutoCorrectExecutor.format(project, doc);
         }
     }
 }

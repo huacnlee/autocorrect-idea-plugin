@@ -20,7 +20,7 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-
+    <depends>com.intellij.modules.lang</depends>
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
@@ -34,15 +34,21 @@
         <!-- https://github.com/JetBrains/intellij-plugins/blob/5f36be77b4b7da753bd04924f4cf7d8c25d63545/prettierJS/resources/META-INF/plugin.xml -->
         <actionOnSaveInfoProvider id="AutoCorrectOnSaveInfoProvider"
                                   implementation="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectConfigurable$AutoCorrectOnSaveInfoProvider"
-                                  />
+        />
         <actionOnSave id="AutoCorrectActionOnSave"
                       implementation="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectActionOnSave"
                       order="first"/>
+        <externalAnnotator
+                language="JSON"
+                implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
+        <externalAnnotator
+                implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
     </extensions>
     <actions>
-        <action id="io.github.huacnlee.autocorrect.FormatAction" class="io.github.huacnlee.autocorrectIdeaPlugin.FormatAction"
+        <action id="io.github.huacnlee.autocorrect.FormatAction"
+                class="io.github.huacnlee.autocorrectIdeaPlugin.FormatAction"
                 text="AutoCorrect Format" description="Format selected text by AutoCorrect">
-            <add-to-group group-id="CodeMenu" anchor="last" />
+            <add-to-group group-id="CodeMenu" anchor="last"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>

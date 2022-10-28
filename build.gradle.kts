@@ -39,7 +39,8 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set("""
+        certificateChain.set(
+            """
         -----BEGIN CERTIFICATE-----
         MIIFTDCCAzQCCQDgR0mP2TUrpzANBgkqhkiG9w0BAQsFADBoMQswCQYDVQQGEwJD
         TjEQMA4GA1UECAwHU2ljaHVhbjEQMA4GA1UEBwwHQ2hlbmdkdTESMBAGA1UECgwJ
@@ -71,9 +72,11 @@ tasks {
         xrMsz7oLjQ2c0WGKP9QOoA4ccBlqLpd5UPAwAUoqhQQAmXHW/wm3l31HwWt+HS/v
         dNau9yxdsimcQsedLnkGSA==
         -----END CERTIFICATE-----
-        """.trimIndent())
+        """.trimIndent()
+        )
 
-        privateKey.set("""
+        privateKey.set(
+            """
         -----BEGIN ENCRYPTED PRIVATE KEY-----
         MIIJnzBJBgkqhkiG9w0BBQ0wPDAbBgkqhkiG9w0BBQwwDgQIUW7QKhh27zoCAggA
         MB0GCWCGSAFlAwQBKgQQUX4DQavYnnIQ9ULiBW97iwSCCVAyi/8EdlgW1XB428rw
@@ -128,7 +131,8 @@ tasks {
         YmT5+rLr/xkAVjmq/Yn+svMyF19TxQLO01uw5xWeRxPNMr3KZvnorWGDeEf57+0X
         gTjR7nAw5NDYiG90v28Iy7kdhg==
         -----END ENCRYPTED PRIVATE KEY-----
-        """.trimIndent())
+        """.trimIndent()
+        )
 
         password.set(System.getenv("IDEA_PUBLISH_PRIVATE_KEY_PASSWORD"))
     }
