@@ -6,7 +6,13 @@
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>AutoCorrect</name>
-
+    <change-notes><![CDATA[
+        <ul>
+        <li>1.2.0: Add .java, .kt, ..gradle, .proto support, and update annotator highlight style.</li>
+        <li>1.1.1: Fix ConfigFileListener to reload config. And fix config UI.</li>
+        </ul>
+    ]]>
+    </change-notes>
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="huacnlee@gmail.com" url="https://github.com/huacnlee">huacnlee</vendor>
 
@@ -42,8 +48,11 @@
         <!-- externalAnnotator for languages -->
         <externalAnnotator language=""
                            implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotator"/>
-
-
+        <!--        <localInspection language="" shortName="AutoCorrectLinter"-->
+        <!--                         displayName="AutoCorrect Linter"-->
+        <!--                         groupName="AutoCorrect"-->
+        <!--                         enabledByDefault="true" level="WEAK_WARNING" unfair="true"-->
+        <!--                         implementationClass="io.github.huacnlee.autocorrectIdeaPlugin.AutoCorrectExternalAnnotatorBatchInspection"/>-->
     </extensions>
     <applicationListeners>
         <listener class="io.github.huacnlee.autocorrectIdeaPlugin.ConfigFileListener"

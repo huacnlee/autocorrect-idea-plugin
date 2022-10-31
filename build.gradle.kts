@@ -1,12 +1,13 @@
 plugins {
     idea
     id("java")
+    id("java-library")
     id("org.jetbrains.intellij") version "1.9.0"
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
 }
 
 group = "io.github.huacnlee"
-version = "1.1.1"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -14,7 +15,7 @@ repositories {
 
 dependencies {
     implementation("org.slf4j:slf4j-nop:1.7.36")
-    implementation("io.github.huacnlee:autocorrect-java:2.3.2")
+    implementation("io.github.huacnlee:autocorrect-java:2.4.3")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -31,17 +32,18 @@ tasks {
         targetCompatibility = "11"
     }
 
+    patchPluginXml {
+        // ActionOnSave start from 2021.2
+        sinceBuild.set("212")
+        untilBuild.set("300.*")
+    }
+
     compileKotlin {
         kotlinOptions.jvmTarget = "11"
     }
 
     compileTestKotlin {
         kotlinOptions.jvmTarget = "11"
-    }
-
-    patchPluginXml {
-        sinceBuild.set("213")
-        untilBuild.set("223.*")
     }
 
     signPlugin {
