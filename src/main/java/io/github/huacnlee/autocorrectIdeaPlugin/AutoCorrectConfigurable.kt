@@ -25,19 +25,23 @@ class AutoCorrectConfigurable : Configurable {
 
     override fun isModified(): Boolean {
         val settings = AppSettingsState.getInstance()
-        var modified = (mySettingsComponent!!.enableFormatOnSave != settings.enableFormatOnSave)
-        return modified
+        return (
+                mySettingsComponent!!.enableFormatOnSave != settings.enableFormatOnSave
+                        || mySettingsComponent!!.enableLint != settings.enableLint
+                )
     }
 
     override fun apply() {
         val settings = AppSettingsState.getInstance()
         settings.enable = mySettingsComponent!!.enable
+        settings.enableLint = mySettingsComponent!!.enableLint
         settings.enableFormatOnSave = mySettingsComponent!!.enableFormatOnSave
     }
 
     override fun reset() {
         val settings = AppSettingsState.getInstance()
         mySettingsComponent!!.enable = settings.enable
+        mySettingsComponent!!.enableLint = settings.enableLint
         mySettingsComponent!!.enableFormatOnSave = settings.enableFormatOnSave
     }
 
@@ -68,7 +72,11 @@ class AutoCorrectConfigurable : Configurable {
             getComment("enableFormatOnSave")
 
         private fun getComment(s: String): ActionOnSaveComment? {
-            return ActionOnSaveComment.info("Turn on/off autoformatting file on save.");
+            if (s == "enableFormatOnSave") {
+                return ActionOnSaveComment.info("Turn on/off autoformatting file on save.")
+            };
+
+            return ActionOnSaveComment.info("");
         }
 
         override fun isActionOnSaveEnabledAccordingToStoredState() = AppSettingsState.getInstance().enableFormatOnSave

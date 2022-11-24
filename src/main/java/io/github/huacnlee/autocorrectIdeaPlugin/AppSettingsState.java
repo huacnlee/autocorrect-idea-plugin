@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class AppSettingsState implements PersistentStateComponent<AppSettingsState> {
     public boolean enable = true;
     public boolean enableFormatOnSave = true;
+    public boolean enableLint = true;
 
     public static AppSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(AppSettingsState.class);

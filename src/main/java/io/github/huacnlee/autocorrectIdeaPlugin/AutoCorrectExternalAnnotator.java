@@ -34,6 +34,10 @@ public class AutoCorrectExternalAnnotator extends ExternalAnnotator<Editor, Lint
     @Nullable
     @Override
     public LintResult doAnnotate(Editor editor) {
+        if (!AppSettingsState.getInstance().enableLint) {
+            return null;
+        }
+
         return AutoCorrectExecutor.lint(editor.getProject(), editor.getDocument());
     }
 
